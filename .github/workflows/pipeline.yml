@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -23,8 +23,8 @@ jobs:
       run: npm run test:unit
     - name: Display SoftUni username "Avradaliev"
       run: echo "Avradaliev"
-  deploy:
-    needs: build
+  Deploy:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to render.com
@@ -33,3 +33,20 @@ jobs:
           service-id: ${{ secrets.MY_RENDER_SHOPPING_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_SHOPPING_API_KEY }}
           wait-for-success: true
+  Testing-UI:
+    needs: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Use Node.js v18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+    - name: Installing project dependencies
+      run: npm i
+    - name: Install Playwright
+      run: npx playwright install
+    - name: Run UI tests
+      run: npm run test:ui
