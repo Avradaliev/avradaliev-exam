@@ -32,7 +32,6 @@ jobs:
         with:
           service-id: ${{ secrets.MY_RENDER_SHOPPING_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_SHOPPING_API_KEY }}
-          wait-for-success: true
   Testing-UI:
     needs: Deploy
     runs-on: ubuntu-latest
