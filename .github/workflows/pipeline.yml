@@ -32,5 +32,4 @@ jobs:
         with:
           service-id: ${{ secrets.MY_RENDER_SHOPPING_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_SHOPPING_API_KEY }}
-      - name: Wait for deploy
-        run: sleep 60
+          wait-for-success: true
